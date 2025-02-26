@@ -1,5 +1,6 @@
 using System.Text;
 using Coderr.API.Data;
+using Coderr.API.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +20,8 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("CoderrConnection
 
 builder.Services.AddDbContext<CoderrAuthDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("CoderrAuthConnectionString")));
+
+builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 
 builder.Services.AddIdentityCore<IdentityUser>()
                 .AddRoles<IdentityRole>()
