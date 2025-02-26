@@ -47,5 +47,36 @@ namespace Coderr.API.Controllers
 
             return BadRequest();
         }
+
+        [HttpPost]
+        [Route("Login")]
+        public async Task<IActionResult> Login([FromBody] LoginRequestDTO loginRequestDTO)
+        {
+            var user = await userManager.FindByEmailAsync(loginRequestDTO.UserName);
+
+            if (user != null)
+            {
+                var checkPasswordResult = await userManager.CheckPasswordAsync(user, loginRequestDTO.Password);
+
+                if (checkPasswordResult)
+                {
+                    var roles = await userManager.GetRolesAsync(user);
+
+                    if (roles != null)
+                    {
+                        var jwtToken = tokenRepository.CreateJWTToken(user, roles.ToList());
+
+                        var response = new LoginResponseDTO
+                        {
+                            JwtToken = jwtToken,
+                        };
+
+                        return Ok(jwtToken);
+                    }
+                }
+            }
+
+            return BadRequest("Username or Password incorrect.");
+        }
     }
 }
