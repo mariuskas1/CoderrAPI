@@ -5,7 +5,7 @@ namespace Coderr.API.Data
 {
     public class CoderrDbContext : DbContext
     {
-        public CoderrDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions) 
+        public CoderrDbContext(DbContextOptions<CoderrDbContext> dbContextOptions) : base(dbContextOptions) 
         {
 
         }
