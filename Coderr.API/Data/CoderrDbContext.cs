@@ -11,7 +11,26 @@ namespace Coderr.API.Data
         }
 
         public DbSet<Offer> Offers { get; set; }
+        public DbSet<OfferDetails> OfferDetails { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
 
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<Order>()
+                .HasOne(o => o.CustomerUser)
+                .WithMany()
+                .HasForeignKey(o => o.CustomerUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Order>()
+                .HasOne(o => o.BusinessUser)
+                .WithMany()
+                .HasForeignKey(o => o.BusinessUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+        }
     }
 }
