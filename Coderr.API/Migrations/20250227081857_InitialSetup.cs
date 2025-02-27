@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Coderr.API.Migrations.CoderrDb
+namespace Coderr.API.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialMig : Migration
+    public partial class InitialSetup : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -65,6 +65,32 @@ namespace Coderr.API.Migrations.CoderrDb
                         principalTable: "UserProfiles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reviews",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BusinessUserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ReviewerId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Rating = table.Column<float>(type: "real", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reviews", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Reviews_UserProfiles_BusinessUserId",
+                        column: x => x.BusinessUserId,
+                        principalTable: "UserProfiles",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Reviews_UserProfiles_ReviewerId",
+                        column: x => x.ReviewerId,
+                        principalTable: "UserProfiles",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -155,6 +181,16 @@ namespace Coderr.API.Migrations.CoderrDb
                 name: "IX_Orders_OfferDetailsId",
                 table: "Orders",
                 column: "OfferDetailsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reviews_BusinessUserId",
+                table: "Reviews",
+                column: "BusinessUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reviews_ReviewerId",
+                table: "Reviews",
+                column: "ReviewerId");
         }
 
         /// <inheritdoc />
@@ -162,6 +198,9 @@ namespace Coderr.API.Migrations.CoderrDb
         {
             migrationBuilder.DropTable(
                 name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "Reviews");
 
             migrationBuilder.DropTable(
                 name: "OfferDetails");

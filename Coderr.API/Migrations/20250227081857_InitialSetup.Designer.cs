@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Coderr.API.Migrations.CoderrDb
+namespace Coderr.API.Migrations
 {
     [DbContext(typeof(CoderrDbContext))]
-    [Migration("20250226193833_Initial Mig")]
-    partial class InitialMig
+    [Migration("20250227081857_InitialSetup")]
+    partial class InitialSetup
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,6 +157,39 @@ namespace Coderr.API.Migrations.CoderrDb
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("Coderr.API.Models.Domain.Review", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("BusinessUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Rating")
+                        .HasColumnType("real");
+
+                    b.Property<string>("ReviewerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BusinessUserId");
+
+                    b.HasIndex("ReviewerId");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("Coderr.API.Models.Domain.UserProfile", b =>
                 {
                     b.Property<string>("Id")
@@ -281,6 +314,25 @@ namespace Coderr.API.Migrations.CoderrDb
                     b.Navigation("CustomerUser");
 
                     b.Navigation("OfferDetails");
+                });
+
+            modelBuilder.Entity("Coderr.API.Models.Domain.Review", b =>
+                {
+                    b.HasOne("Coderr.API.Models.Domain.UserProfile", "BusinessUser")
+                        .WithMany()
+                        .HasForeignKey("BusinessUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Coderr.API.Models.Domain.UserProfile", "Reviewer")
+                        .WithMany()
+                        .HasForeignKey("ReviewerId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("BusinessUser");
+
+                    b.Navigation("Reviewer");
                 });
 
             modelBuilder.Entity("Coderr.API.Models.Domain.Offer", b =>

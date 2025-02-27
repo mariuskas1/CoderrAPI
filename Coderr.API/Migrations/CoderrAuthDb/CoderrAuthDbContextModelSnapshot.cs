@@ -4,19 +4,16 @@ using Coderr.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Coderr.API.Migrations
+namespace Coderr.API.Migrations.CoderrAuthDb
 {
     [DbContext(typeof(CoderrAuthDbContext))]
-    [Migration("20250226150016_Auth Database")]
-    partial class AuthDatabase
+    partial class CoderrAuthDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Coderr.API.Migrations
+namespace Coderr.API.Migrations.CoderrAuthDb
 {
     /// <inheritdoc />
-    public partial class AuthDatabase : Migration
+    public partial class InitialAuthDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

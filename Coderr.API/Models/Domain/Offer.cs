@@ -5,6 +5,7 @@ namespace Coderr.API.Models.Domain
 {
     public class Offer
     {
+        [Key]
         public Guid Id { get; set; }
 
         [ForeignKey("UserProfile")]

@@ -4,16 +4,19 @@ using Coderr.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Coderr.API.Migrations
+namespace Coderr.API.Migrations.CoderrAuthDb
 {
     [DbContext(typeof(CoderrAuthDbContext))]
-    partial class CoderrAuthDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250227082131_InitialAuthDb")]
+    partial class InitialAuthDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -14,6 +14,7 @@ namespace Coderr.API.Data
         public DbSet<OfferDetails> OfferDetails { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Review> Reviews { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -30,6 +31,18 @@ namespace Coderr.API.Data
                 .HasOne(o => o.BusinessUser)
                 .WithMany()
                 .HasForeignKey(o => o.BusinessUserId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Review>()
+            .HasOne(r => r.BusinessUser)
+            .WithMany()
+            .HasForeignKey(r => r.BusinessUserId)
+            .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Review>()
+                .HasOne(r => r.Reviewer)
+                .WithMany()
+                .HasForeignKey(r => r.ReviewerId)
                 .OnDelete(DeleteBehavior.NoAction);
         }
     }
