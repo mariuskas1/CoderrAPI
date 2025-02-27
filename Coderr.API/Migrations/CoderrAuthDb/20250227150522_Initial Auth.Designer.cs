@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Coderr.API.Migrations.CoderrAuthDb
 {
     [DbContext(typeof(CoderrAuthDbContext))]
-    [Migration("20250227082131_InitialAuthDb")]
-    partial class InitialAuthDb
+    [Migration("20250227150522_Initial Auth")]
+    partial class InitialAuth
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

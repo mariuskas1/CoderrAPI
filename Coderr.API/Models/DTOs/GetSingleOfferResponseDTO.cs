@@ -2,18 +2,18 @@
 {
     public class GetSingleOfferResponseDTO
     {
-        public Guid Id { get; set; }
-        public string Title { get; set; }
-        public string? Image { get; set; }
-        public string Description { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public Guid id { get; set; }
+        public string title { get; set; }
+        public string? image { get; set; }
+        public string description { get; set; }
+        public DateTime created_at { get; set; }
+        public DateTime updated_at { get; set; }
 
-        public List<GetSingleOfferDetailResponseDTO> Details { get; set; } = new List<GetSingleOfferDetailResponseDTO>();
+        public List<GetSingleOfferDetailResponseDTO> details { get; set; } = new List<GetSingleOfferDetailResponseDTO>();
 
-        public decimal MinPrice { get; set; }
-        public int MinDeliveryTime { get; set; }
+        public decimal min_price { get; set; }
+        public int min_delivery_time { get; set; }
 
-        public UserDetailsDTO UserDetails { get; set; }
+        public UserDetailsDTO user_details { get; set; }
     }
 }

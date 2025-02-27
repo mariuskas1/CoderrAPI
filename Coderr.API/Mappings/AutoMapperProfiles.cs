@@ -7,7 +7,7 @@ namespace Coderr.API.Mappings
 {
     public class AutoMapperProfiles : Profile
     {
-        protected AutoMapperProfiles()
+        public AutoMapperProfiles()
         {
             CreateMap<Offer, OfferDTO>().ReverseMap();
             CreateMap<Order, OrderDTO>().ReverseMap();
@@ -16,46 +16,46 @@ namespace Coderr.API.Mappings
             CreateMap<UserProfile, UserProfileDTO>().ReverseMap();
 
             CreateMap<AddOfferRequestDTO, Offer>()
-            .ForMember(dest => dest.OfferDetails, opt => opt.MapFrom(src => src.Details));
+            .ForMember(dest => dest.details, opt => opt.MapFrom(src => src.details));
 
             CreateMap<AddOfferDetailRequestDTO, OfferDetails>()
-            .ForMember(dest => dest.Features, opt => opt.MapFrom(src => string.Join(",", src.Features)));
+            .ForMember(dest => dest.features, opt => opt.MapFrom(src => string.Join(",", src.features)));
 
             CreateMap<Offer, AddOfferResponseDTO>()
-             .ForMember(dest => dest.Details, opt => opt.MapFrom(src => src.OfferDetails));
+             .ForMember(dest => dest.details, opt => opt.MapFrom(src => src.details));
 
             CreateMap<OfferDetails, AddOfferDetailResponseDTO>()
-            .ForMember(dest => dest.Features, opt => opt.MapFrom<FeaturesStringToListResolver>());
+            .ForMember(dest => dest.features, opt => opt.MapFrom<FeaturesStringToListResolver>());
 
 
             CreateMap<Offer, GetAllOffersResponseDTO>()
-            .ForMember(dest => dest.Details, opt => opt.MapFrom(src => src.OfferDetails.Select(d => new OfferDetailDTO
+            .ForMember(dest => dest.details, opt => opt.MapFrom(src => src.details.Select(d => new OfferDetailDTO
             {
-                Id = d.Id,
-                Url = $"/offerdetails/{d.Id}/"
+                id = d.id,
+                url = $"/offerdetails/{d.id}/"
             }).ToList()))
-            .ForMember(dest => dest.MinPrice, opt => opt.MapFrom(src => src.OfferDetails.Any() ? src.OfferDetails.Min(d => d.Price) : 0))
-            .ForMember(dest => dest.MinDeliveryTime, opt => opt.MapFrom(src => src.OfferDetails.Any() ? src.OfferDetails.Min(d => d.DeliveryTimeInDays ?? 0) : 0))
-            .ForMember(dest => dest.UserDetails, opt => opt.MapFrom(src => new UserDetailsDTO
+            .ForMember(dest => dest.min_price, opt => opt.MapFrom(src => src.details.Any() ? src.details.Min(d => d.price) : 0))
+            .ForMember(dest => dest.min_delivery_time, opt => opt.MapFrom(src => src.details.Any() ? src.details.Min(d => d.delivery_time_in_days ?? 0) : 0))
+            .ForMember(dest => dest.details, opt => opt.MapFrom(src => new UserDetailsDTO
             {
-                FirstName = src.User.FirstName,
-                LastName = src.User.LastName,
-                Username = src.User.Username
+                first_name = src.user.first_name,
+                last_name = src.user.last_name,
+                username = src.user.username
             }));
 
             CreateMap<Offer, GetSingleOfferResponseDTO>()
-           .ForMember(dest => dest.Details, opt => opt.MapFrom(src => src.OfferDetails))
-           .ForMember(dest => dest.MinPrice, opt => opt.MapFrom(src => src.OfferDetails.Any() ? src.OfferDetails.Min(d => d.Price) : 0))
-           .ForMember(dest => dest.MinDeliveryTime, opt => opt.MapFrom(src => src.OfferDetails.Any() ? src.OfferDetails.Min(d => d.DeliveryTimeInDays ?? 0) : 0))
-           .ForMember(dest => dest.UserDetails, opt => opt.MapFrom(src => new UserDetailsDTO
+           .ForMember(dest => dest.details, opt => opt.MapFrom(src => src.details))
+           .ForMember(dest => dest.min_price, opt => opt.MapFrom(src => src.details.Any() ? src.details.Min(d => d.price) : 0))
+           .ForMember(dest => dest.min_delivery_time, opt => opt.MapFrom(src => src.details.Any() ? src.details.Min(d => d.delivery_time_in_days ?? 0) : 0))
+           .ForMember(dest => dest.user_details, opt => opt.MapFrom(src => new UserDetailsDTO
            {
-               FirstName = src.User.FirstName,
-               LastName = src.User.LastName,
-               Username = src.User.Username
+               first_name = src.user.first_name,
+               last_name= src.user.last_name,
+               username = src.user.username
            }));
 
            CreateMap<OfferDetails, GetSingleOfferDetailResponseDTO>()
-            .ForMember(dest => dest.Features, opt => opt.MapFrom(src => src.Features.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList()));
+            .ForMember(dest => dest.features, opt => opt.MapFrom(src => src.features.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList()));
         }
     }
 }

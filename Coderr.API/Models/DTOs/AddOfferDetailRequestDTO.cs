@@ -2,11 +2,11 @@
 {
     public class AddOfferDetailRequestDTO
     {
-        public string Title { get; set; }
-        public int Revisions { get; set; }
-        public int? DeliveryTimeInDays { get; set; }
-        public decimal Price { get; set; }
-        public List<string> Features { get; set; } = new List<string>();
-        public string OfferType { get; set; }
+        public string title { get; set; }
+        public int revisions { get; set; }
+        public int? delivery_time_in_days { get; set; }
+        public decimal price { get; set; }
+        public List<string> features { get; set; } = new List<string>();
+        public string offer_type { get; set; }
     }
 }

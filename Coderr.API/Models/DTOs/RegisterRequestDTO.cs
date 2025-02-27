@@ -6,12 +6,12 @@ namespace Coderr.API.Models.DTOs
     {
         [Required]
         [DataType(DataType.EmailAddress)]
-        public string Username { get; set; }
+        public string username { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        public string Password { get; set; }
+        public string password { get; set; }
 
-        public string[] Roles { get; set; }
+        public string[] roles { get; set; }
     }
 }

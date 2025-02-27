@@ -2,10 +2,10 @@
 {
     public class AddOfferResponseDTO
     {
-        public Guid Id { get; set; }
-        public string Title { get; set; }
-        public string? Image { get; set; }
-        public string Description { get; set; }
-        public List<AddOfferDetailResponseDTO> Details { get; set; } = new List<AddOfferDetailResponseDTO>();
+        public Guid id { get; set; }
+        public string title { get; set; }
+        public string? image { get; set; }
+        public string description { get; set; }
+        public List<AddOfferDetailResponseDTO> details { get; set; } = new List<AddOfferDetailResponseDTO>();
     }
 }

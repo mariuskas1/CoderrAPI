@@ -4,16 +4,16 @@ namespace Coderr.API.Models.DTOs
 {
     public class GetAllOffersResponseDTO
     {
-        public Guid Id { get; set; }
-        public string Title { get; set; }
-        public string? Image { get; set; }
-        public string Description { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public List<OfferDetailDTO> Details { get; set; } = new List<OfferDetailDTO>();
-        public decimal MinPrice { get; set; }
-        public int MinDeliveryTime { get; set; }
-        public UserDetailsDTO UserDetails { get; set; }
+        public Guid id { get; set; }
+        public string title { get; set; }
+        public string? image { get; set; }
+        public string description { get; set; }
+        public DateTime created_at { get; set; }
+        public DateTime updated_at { get; set; }
+        public List<OfferDetailDTO> details { get; set; } = new List<OfferDetailDTO>();
+        public decimal min_price { get; set; }
+        public int min_delivery_time { get; set; }
+        public UserDetailsDTO user_details { get; set; }
 
 
     }

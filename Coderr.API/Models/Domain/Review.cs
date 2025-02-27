@@ -4,17 +4,17 @@ namespace Coderr.API.Models.Domain
 {
     public class Review
     {
-        public Guid Id { get; set; }
+        public Guid id { get; set; }
 
-        [ForeignKey("BusinessUser")]
-        public string BusinessUserId { get; set; }
-        public UserProfile BusinessUser { get; set; }
+        [ForeignKey("business_user")]
+        public Guid BusinessUserId { get; set; }
+        public UserProfile business_user { get; set; }
 
-        [ForeignKey("Reviewer")]
-        public string ReviewerId { get; set; }
-        public UserProfile Reviewer { get; set; }
-        public float Rating { get; set; }
-        public string Description { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        [ForeignKey("reviewer")]
+        public Guid ReviewerId { get; set; }
+        public UserProfile reviewer { get; set; }
+        public float rating { get; set; }
+        public string description { get; set; }
+        public DateTime created_at { get; set; } = DateTime.UtcNow;
     }
 }

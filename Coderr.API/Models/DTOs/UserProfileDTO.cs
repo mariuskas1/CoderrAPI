@@ -12,16 +12,16 @@ namespace Coderr.API.Models.DTOs
         }
 
         [Required]
-        public string Name { get; set; }
-        public string? FilePath { get; set; }
-        public string? Location { get; set; }
-        public string? Tel { get; set; }
-        public string? Description { get; set; }
-        public string? WorkingHours { get; set; }
+        public string name { get; set; }
+        public string? file_path { get; set; }
+        public string? location { get; set; }
+        public string? tel { get; set; }
+        public string? description { get; set; }
+        public string? working_hours{ get; set; }
 
         [Required]
-        public UserType Type { get; set; }
+        public UserType type { get; set; }
 
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public DateTime created_at { get; set; } = DateTime.UtcNow;
     }
 }

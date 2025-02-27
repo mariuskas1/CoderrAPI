@@ -22,25 +22,25 @@ namespace Coderr.API.Data
             base.OnModelCreating(builder);
 
             builder.Entity<Order>()
-                .HasOne(o => o.CustomerUser)
+                .HasOne(o => o.customer_user)
                 .WithMany()
                 .HasForeignKey(o => o.CustomerUserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Order>()
-                .HasOne(o => o.BusinessUser)
+                .HasOne(o => o.business_user)
                 .WithMany()
                 .HasForeignKey(o => o.BusinessUserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Review>()
-            .HasOne(r => r.BusinessUser)
+            .HasOne(r => r.business_user)
             .WithMany()
             .HasForeignKey(r => r.BusinessUserId)
             .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Review>()
-                .HasOne(r => r.Reviewer)
+                .HasOne(r => r.reviewer)
                 .WithMany()
                 .HasForeignKey(r => r.ReviewerId)
                 .OnDelete(DeleteBehavior.NoAction);

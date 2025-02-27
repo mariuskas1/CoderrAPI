@@ -26,17 +26,17 @@ namespace Coderr.API.Controllers
         {
             var identityUser = new IdentityUser
             {
-                UserName = registerRequestDTO.Username,
-                Email = registerRequestDTO.Username
+                UserName = registerRequestDTO.username,
+                Email = registerRequestDTO.username
             };
 
-            var identityResult = await userManager.CreateAsync(identityUser, registerRequestDTO.Password);
+            var identityResult = await userManager.CreateAsync(identityUser, registerRequestDTO.password);
 
             if (identityResult.Succeeded)
             {
-                if (registerRequestDTO.Roles != null && registerRequestDTO.Roles.Any())
+                if (registerRequestDTO.roles != null && registerRequestDTO.roles.Any())
                 {
-                    identityResult = await userManager.AddToRolesAsync(identityUser, registerRequestDTO.Roles);
+                    identityResult = await userManager.AddToRolesAsync(identityUser, registerRequestDTO.roles);
 
                     if (identityResult.Succeeded)
                     {
@@ -52,11 +52,11 @@ namespace Coderr.API.Controllers
         [Route("Login")]
         public async Task<IActionResult> Login([FromBody] LoginRequestDTO loginRequestDTO)
         {
-            var user = await userManager.FindByEmailAsync(loginRequestDTO.UserName);
+            var user = await userManager.FindByEmailAsync(loginRequestDTO.username);
 
             if (user != null)
             {
-                var checkPasswordResult = await userManager.CheckPasswordAsync(user, loginRequestDTO.Password);
+                var checkPasswordResult = await userManager.CheckPasswordAsync(user, loginRequestDTO.password);
 
                 if (checkPasswordResult)
                 {

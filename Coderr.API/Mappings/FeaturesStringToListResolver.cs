@@ -9,9 +9,9 @@ namespace Coderr.API.Mappings
     {
         public List<string> Resolve(OfferDetails source, AddOfferDetailResponseDTO destination, List<string> destMember, ResolutionContext context)
         {
-            return string.IsNullOrEmpty(source.Features)
+            return string.IsNullOrEmpty(source.features)
             ? new List<string>()
-            : source.Features.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList();
+            : source.features.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList();
         }
     }
 }

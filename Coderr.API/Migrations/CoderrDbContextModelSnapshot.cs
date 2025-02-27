@@ -24,32 +24,31 @@ namespace Coderr.API.Migrations
 
             modelBuilder.Entity("Coderr.API.Models.Domain.Offer", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("created_at")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
+                    b.Property<string>("image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime>("updated_at")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.HasIndex("UserId");
 
@@ -58,34 +57,34 @@ namespace Coderr.API.Migrations
 
             modelBuilder.Entity("Coderr.API.Models.Domain.OfferDetails", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("DeliveryTimeInDays")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Features")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("OfferId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("OfferType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(10,2)");
-
-                    b.Property<int>("Revisions")
+                    b.Property<int?>("delivery_time_in_days")
                         .HasColumnType("int");
 
-                    b.Property<string>("Title")
+                    b.Property<string>("features")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("offer_type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("price")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<int>("revisions")
+                        .HasColumnType("int");
+
+                    b.Property<string>("title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
 
                     b.HasIndex("OfferId");
 
@@ -94,91 +93,87 @@ namespace Coderr.API.Migrations
 
             modelBuilder.Entity("Coderr.API.Models.Domain.Order", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("BusinessUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("BusinessUserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CustomerUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("DeliveryTimeInDays")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Features")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("CustomerUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("OfferDetailId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("OfferDetailsId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("OfferType")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(10,2)");
-
-                    b.Property<int>("Revisions")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<DateTime>("created_at")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.Property<int>("delivery_time_in_days")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("detailsid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("features")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("offer_type")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("price")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<int>("revisions")
+                        .HasColumnType("int");
+
+                    b.Property<string>("status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("updated_at")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("id");
 
                     b.HasIndex("BusinessUserId");
 
                     b.HasIndex("CustomerUserId");
 
-                    b.HasIndex("OfferDetailsId");
+                    b.HasIndex("detailsid");
 
                     b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Coderr.API.Models.Domain.Review", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("BusinessUserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("BusinessUserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<Guid>("ReviewerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("created_at")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("Rating")
+                    b.Property<float>("rating")
                         .HasColumnType("real");
 
-                    b.Property<string>("ReviewerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.HasIndex("BusinessUserId");
 
@@ -189,152 +184,119 @@ namespace Coderr.API.Migrations
 
             modelBuilder.Entity("Coderr.API.Models.Domain.UserProfile", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("created_at")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Email")
+                    b.Property<string>("file")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("FilePath")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Location")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("first_name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NormalizedEmail")
+                    b.Property<string>("last_name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NormalizedUserName")
+                    b.Property<string>("location")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PasswordHash")
+                    b.Property<string>("tel")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Tel")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Type")
+                    b.Property<int>("type")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserName")
+                    b.Property<string>("username")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("WorkingHours")
+                    b.Property<string>("working_hours")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("id");
 
                     b.ToTable("UserProfiles");
                 });
 
             modelBuilder.Entity("Coderr.API.Models.Domain.Offer", b =>
                 {
-                    b.HasOne("Coderr.API.Models.Domain.UserProfile", "User")
+                    b.HasOne("Coderr.API.Models.Domain.UserProfile", "user")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("User");
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("Coderr.API.Models.Domain.OfferDetails", b =>
                 {
-                    b.HasOne("Coderr.API.Models.Domain.Offer", "Offer")
-                        .WithMany("OfferDetails")
+                    b.HasOne("Coderr.API.Models.Domain.Offer", "offer")
+                        .WithMany("details")
                         .HasForeignKey("OfferId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Offer");
+                    b.Navigation("offer");
                 });
 
             modelBuilder.Entity("Coderr.API.Models.Domain.Order", b =>
                 {
-                    b.HasOne("Coderr.API.Models.Domain.UserProfile", "BusinessUser")
+                    b.HasOne("Coderr.API.Models.Domain.UserProfile", "business_user")
                         .WithMany()
                         .HasForeignKey("BusinessUserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Coderr.API.Models.Domain.UserProfile", "CustomerUser")
+                    b.HasOne("Coderr.API.Models.Domain.UserProfile", "customer_user")
                         .WithMany()
                         .HasForeignKey("CustomerUserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Coderr.API.Models.Domain.OfferDetails", "OfferDetails")
+                    b.HasOne("Coderr.API.Models.Domain.OfferDetails", "details")
                         .WithMany()
-                        .HasForeignKey("OfferDetailsId")
+                        .HasForeignKey("detailsid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("BusinessUser");
+                    b.Navigation("business_user");
 
-                    b.Navigation("CustomerUser");
+                    b.Navigation("customer_user");
 
-                    b.Navigation("OfferDetails");
+                    b.Navigation("details");
                 });
 
             modelBuilder.Entity("Coderr.API.Models.Domain.Review", b =>
                 {
-                    b.HasOne("Coderr.API.Models.Domain.UserProfile", "BusinessUser")
+                    b.HasOne("Coderr.API.Models.Domain.UserProfile", "business_user")
                         .WithMany()
                         .HasForeignKey("BusinessUserId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Coderr.API.Models.Domain.UserProfile", "Reviewer")
+                    b.HasOne("Coderr.API.Models.Domain.UserProfile", "reviewer")
                         .WithMany()
                         .HasForeignKey("ReviewerId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.Navigation("BusinessUser");
+                    b.Navigation("business_user");
 
-                    b.Navigation("Reviewer");
+                    b.Navigation("reviewer");
                 });
 
             modelBuilder.Entity("Coderr.API.Models.Domain.Offer", b =>
                 {
-                    b.Navigation("OfferDetails");
+                    b.Navigation("details");
                 });
 #pragma warning restore 612, 618
         }

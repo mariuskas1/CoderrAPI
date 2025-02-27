@@ -31,7 +31,7 @@ namespace Coderr.API.Repositories
 
         public async Task<Offer?> GetByIdAsync(Guid id)
         {
-            return await dbContext.Offers.FirstOrDefaultAsync(x => x.Id == id);
+            return await dbContext.Offers.FirstOrDefaultAsync(x => x.id == id);
         }
 
         public Task<Offer?> UpdateAsync(Guid id, Offer offer)

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Coderr.API.Migrations.CoderrAuthDb
 {
     /// <inheritdoc />
-    public partial class InitialAuthDb : Migration
+    public partial class InitialAuth : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

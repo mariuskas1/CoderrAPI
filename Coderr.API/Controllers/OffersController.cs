@@ -40,7 +40,7 @@ namespace Coderr.API.Controllers
             var offerDomainModel = mapper.Map<Offer>(addOfferRequestDTO);
             offerDomainModel = await offerRepository.CreateAsync(offerDomainModel);
             var addOfferResponseDTO = mapper.Map<AddOfferResponseDTO>(offerDomainModel);
-            return CreatedAtAction(nameof(GetById), new { id = addOfferResponseDTO.Id }, addOfferResponseDTO);
+            return CreatedAtAction(nameof(GetById), new { id = addOfferResponseDTO.id }, addOfferResponseDTO);
         }
 
         [HttpGet]

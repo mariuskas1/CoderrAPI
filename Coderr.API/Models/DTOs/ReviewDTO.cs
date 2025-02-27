@@ -5,17 +5,17 @@ namespace Coderr.API.Models.DTOs
 {
     public class ReviewDTO
     {
-        public Guid Id { get; set; }
+        public Guid id { get; set; }
 
-        [ForeignKey("BusinessUser")]
-        public string BusinessUserId { get; set; }
-        public UserProfile BusinessUser { get; set; }
+        [ForeignKey("business_user")]
+        public string business_user_id { get; set; }
+        public UserProfile business_user { get; set; }
 
-        [ForeignKey("Reviewer")]
-        public string ReviewerId { get; set; }
-        public UserProfile Reviewer { get; set; }
-        public float Rating { get; set; }
-        public string Description { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        [ForeignKey("reviewer")]
+        public string reviewer_id { get; set; }
+        public UserProfile reviewer { get; set; }
+        public float rating { get; set; }
+        public string description { get; set; }
+        public DateTime created_at { get; set; } = DateTime.UtcNow;
     }
 }
