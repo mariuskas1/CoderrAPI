@@ -14,9 +14,11 @@ namespace Coderr.API.Repositories
         }
 
 
-        public Task<Offer> CreateAsync(Offer offer)
+        public async Task<Offer> CreateAsync(Offer offer)
         {
-            throw new NotImplementedException();
+           await dbContext.Offers.AddAsync(offer);
+           await dbContext.SaveChangesAsync();
+           return offer;
         }
 
         public Task<Offer?> DeleteAsync(Guid id)
