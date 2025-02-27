@@ -45,10 +45,19 @@ namespace Coderr.API.Controllers
 
         [HttpGet]
         [Route("{id:guid}")]
+        [ProducesResponseType(typeof(GetSingleOfferResponseDTO), 200)]
 
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
+            var offer = await offerRepository.GetByIdAsync(id);
 
+            if (offer == null)
+            {
+                return NotFound();
+            }
+
+            var offerDTO = mapper.Map<GetSingleOfferResponseDTO>(offer);
+            return Ok(offerDTO);
         }
     }
 }
