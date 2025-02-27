@@ -31,5 +31,11 @@ namespace Coderr.API.Controllers
             var offersDTO = mapper.Map<List<GetAllOffersResponseDTO>>(offersDomain);
             return Ok(offersDTO);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] AddOfferRequestDTO addOfferRequestDTO)
+        {
+
+        }
     }
 }

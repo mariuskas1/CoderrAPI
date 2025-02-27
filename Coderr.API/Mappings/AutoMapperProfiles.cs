@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Text.Json;
+using AutoMapper;
 using Coderr.API.Models.Domain;
 using Coderr.API.Models.DTOs;
 
@@ -13,6 +14,18 @@ namespace Coderr.API.Mappings
             CreateMap<OfferDetails, OfferDetailsDTO>().ReverseMap();
             CreateMap<Review, ReviewDTO>().ReverseMap();
             CreateMap<UserProfile, UserProfileDTO>().ReverseMap();
+
+            CreateMap<AddOfferRequestDTO, Offer>()
+            .ForMember(dest => dest.OfferDetails, opt => opt.MapFrom(src => src.Details));
+
+            CreateMap<AddOfferDetailRequestDTO, OfferDetails>()
+            .ForMember(dest => dest.Features, opt => opt.MapFrom(src => string.Join(",", src.Features)));
+
+            CreateMap<Offer, AddOfferResponseDTO>()
+             .ForMember(dest => dest.Details, opt => opt.MapFrom(src => src.OfferDetails));
+
+            CreateMap<OfferDetails, AddOfferDetailResponseDTO>()
+            .ForMember(dest => dest.Features, opt => opt.MapFrom<FeaturesStringToListResolver>());
 
 
             CreateMap<Offer, GetAllOffersResponseDTO>()
