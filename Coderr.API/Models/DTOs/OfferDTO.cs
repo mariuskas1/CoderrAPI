@@ -1,15 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Coderr.API.Models.Domain;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
-namespace Coderr.API.Models.Domain
+namespace Coderr.API.Models.DTOs
 {
-    public class Offer
+    public class OfferDTO
     {
         public Guid Id { get; set; }
 
         [ForeignKey("UserProfile")]
         public string UserId { get; set; }
-        public UserProfile User {  get; set; }
+        public UserProfile User { get; set; }
 
         [Required]
         public string Title { get; set; }
