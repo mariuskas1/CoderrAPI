@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Dynamic;
+using AutoMapper;
 using Coderr.API.Data;
 using Coderr.API.Models.Domain;
 using Coderr.API.Models.DTOs;
@@ -33,9 +34,13 @@ namespace Coderr.API.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(AddOfferResponseDTO), 201)]
         public async Task<IActionResult> Create([FromBody] AddOfferRequestDTO addOfferRequestDTO)
         {
-
+            var offerDomainModel = mapper.Map<Offer>(addOfferRequestDTO);
+            offerDomainModel = await offerRepository.CreateAsync(offerDomainModel);
+            var addOfferResponseDTO = mapper.Map<AddOfferResponseDTO>(offerDomainModel);
+            return CreatedAtAction(nameof(GetById), new { id = addOfferResponseDTO.Id }, addOfferResponseDTO);
         }
     }
 }
