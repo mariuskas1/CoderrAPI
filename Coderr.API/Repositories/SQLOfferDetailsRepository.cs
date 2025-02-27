@@ -1,4 +1,5 @@
 ﻿using Coderr.API.Data;
+using Coderr.API.Models.Domain;
 
 namespace Coderr.API.Repositories
 {
@@ -9,6 +10,11 @@ namespace Coderr.API.Repositories
         public SQLOfferDetailsRepository(CoderrDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public Task<OfferDetails?> GetByIdAsync(Guid id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
