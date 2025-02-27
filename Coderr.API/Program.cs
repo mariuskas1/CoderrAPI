@@ -1,5 +1,6 @@
 using System.Text;
 using Coderr.API.Data;
+using Coderr.API.Mappings;
 using Coderr.API.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -52,6 +53,18 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("CoderrConnection
 builder.Services.AddDbContext<CoderrAuthDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("CoderrAuthConnectionString")));
 
+builder.Services.AddScoped<IOfferRepository, SQLOfferRepository>();
+
+builder.Services.AddScoped<IOrderRepository, SQLOrderRepository>();
+
+builder.Services.AddScoped<IOfferDetailsRepository, SQLOfferDetailsRepository>();
+
+builder.Services.AddScoped<IReviewRepository, SQLReviewRepository>();
+
+builder.Services.AddScoped<IUserProfileRepository, SQLUserProfileRepository>();
+
+
+
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
 
 builder.Services.AddIdentityCore<IdentityUser>()
@@ -83,6 +96,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         IssuerSigningKey = new SymmetricSecurityKey(
             Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     });
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
 var app = builder.Build();
 
