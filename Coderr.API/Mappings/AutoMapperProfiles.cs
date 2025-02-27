@@ -42,6 +42,20 @@ namespace Coderr.API.Mappings
                 LastName = src.User.LastName,
                 Username = src.User.Username
             }));
+
+            CreateMap<Offer, GetSingleOfferResponseDTO>()
+           .ForMember(dest => dest.Details, opt => opt.MapFrom(src => src.OfferDetails))
+           .ForMember(dest => dest.MinPrice, opt => opt.MapFrom(src => src.OfferDetails.Any() ? src.OfferDetails.Min(d => d.Price) : 0))
+           .ForMember(dest => dest.MinDeliveryTime, opt => opt.MapFrom(src => src.OfferDetails.Any() ? src.OfferDetails.Min(d => d.DeliveryTimeInDays ?? 0) : 0))
+           .ForMember(dest => dest.UserDetails, opt => opt.MapFrom(src => new UserDetailsDTO
+           {
+               FirstName = src.User.FirstName,
+               LastName = src.User.LastName,
+               Username = src.User.Username
+           }));
+
+           CreateMap<OfferDetails, GetSingleOfferDetailResponseDTO>()
+            .ForMember(dest => dest.Features, opt => opt.MapFrom(src => src.Features.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList()));
         }
     }
 }

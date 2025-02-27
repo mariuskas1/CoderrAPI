@@ -42,5 +42,13 @@ namespace Coderr.API.Controllers
             var addOfferResponseDTO = mapper.Map<AddOfferResponseDTO>(offerDomainModel);
             return CreatedAtAction(nameof(GetById), new { id = addOfferResponseDTO.Id }, addOfferResponseDTO);
         }
+
+        [HttpGet]
+        [Route("{id:guid}")]
+
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
+        {
+
+        }
     }
 }
