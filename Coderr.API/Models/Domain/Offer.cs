@@ -8,8 +8,8 @@ namespace Coderr.API.Models.Domain
         public Guid id { get; set; }
 
         [ForeignKey("user")]
-        public Guid UserId { get; set; }
-        public UserProfile user {  get; set; }
+        public Guid? UserId { get; set; }
+        public UserProfile? user {  get; set; }
 
         [Required]
         public string title { get; set; }

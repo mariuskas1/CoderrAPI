@@ -1,4 +1,5 @@
-﻿using Coderr.API.Models.Domain;
+﻿using System.Reflection.Emit;
+using Coderr.API.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace Coderr.API.Data
@@ -20,6 +21,12 @@ namespace Coderr.API.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            foreach (var relationship in builder.Model.GetEntityTypes()
+                .SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
 
             builder.Entity<Order>()
                 .HasOne(o => o.customer_user)

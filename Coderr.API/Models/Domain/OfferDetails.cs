@@ -9,8 +9,8 @@ namespace Coderr.API.Models.Domain
         public Guid id { get; set; }
 
         [ForeignKey("offer")]
-        public Guid OfferId { get; set; }
-        public Offer offer { get; set; }
+        public Guid? OfferId { get; set; }
+        public Offer? offer { get; set; }
 
         [Required]
         public string title { get; set; }
