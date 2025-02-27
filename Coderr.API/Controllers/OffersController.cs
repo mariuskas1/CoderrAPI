@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Coderr.API.Data;
+using Coderr.API.Models.Domain;
+using Coderr.API.Models.DTOs;
 using Coderr.API.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,9 +24,12 @@ namespace Coderr.API.Controllers
         }
 
         [HttpGet]
+        [ProducesResponseType(typeof(List<GetAllOffersResponseDTO>), 200)]
         public async Task<IActionResult> GetAll()
         {
             var offersDomain = await offerRepository.GetAllAsync();
+            var offersDTO = mapper.Map<List<GetAllOffersResponseDTO>>(offersDomain);
+            return Ok(offersDTO);
         }
     }
 }

@@ -11,8 +11,13 @@ namespace Coderr.API.Models.Domain
             Customer
         }
 
-        [Required]
-        public string Name { get; set; }
+        //[Required]
+        //public string Name { get; set; }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Username { get; set; }
+
         public string? FilePath { get; set; }
         public string? Location { get; set; }
         public string? Tel {  get; set; }
