@@ -36,7 +36,7 @@ namespace Coderr.API.Mappings
             }).ToList()))
             .ForMember(dest => dest.min_price, opt => opt.MapFrom(src => src.details.Any() ? src.details.Min(d => d.price) : 0))
             .ForMember(dest => dest.min_delivery_time, opt => opt.MapFrom(src => src.details.Any() ? src.details.Min(d => d.delivery_time_in_days ?? 0) : 0))
-            .ForMember(dest => dest.details, opt => opt.MapFrom(src => new UserDetailsDTO
+            .ForMember(dest => dest.user_details, opt => opt.MapFrom(src => new UserDetailsDTO
             {
                 first_name = src.user.first_name,
                 last_name = src.user.last_name,

@@ -28,12 +28,18 @@ namespace Coderr.API.Repositories
 
         public async Task<List<Offer>> GetAllAsync()
         {
-            return await dbContext.Offers.ToListAsync();
+            return await dbContext.Offers
+                .Include(o => o.details)
+                .Include(o => o.user)
+                .ToListAsync();
         }
 
         public async Task<Offer?> GetByIdAsync(Guid id)
         {
-            return await dbContext.Offers.FirstOrDefaultAsync(x => x.id == id);
+            return await dbContext.Offers
+                .Include(o => o.details) 
+                .Include(o => o.user)    
+                .FirstOrDefaultAsync(x => x.id == id);
         }
 
         public Task<Offer?> UpdateAsync(Guid id, Offer offer)
