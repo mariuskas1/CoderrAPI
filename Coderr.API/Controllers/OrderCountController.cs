@@ -20,7 +20,7 @@ namespace Coderr.API.Controllers
         public async Task<IActionResult> GetOrderCount(Guid business_user_id)
         {
             var orderCount = await orderRepository.GetOrderCountAsync(business_user_id);
-            return Ok(new { total_orders = orderCount });
+            return Ok(new { order_count = orderCount });
         }
 
         [HttpGet]
@@ -28,7 +28,7 @@ namespace Coderr.API.Controllers
         public async Task<IActionResult> GetCompletedOrderCount(Guid business_user_id)
         {
             var completedOrderCount = await orderRepository.GetCompletedOrderCountAsync(business_user_id);
-            return Ok(new { completed_orders = completedOrderCount });
+            return Ok(new { completed_order_count = completedOrderCount });
         }
     }
 }
