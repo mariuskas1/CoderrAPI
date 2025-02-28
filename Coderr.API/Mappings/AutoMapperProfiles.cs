@@ -65,6 +65,13 @@ namespace Coderr.API.Mappings
            CreateMap<OfferDetails, GetOfferDetailsResponseDTO>();
 
 
+            CreateMap<Order, GetAllOrdersResponseDTO>()
+                .ForMember(dest => dest.features, opt => opt.MapFrom(src =>
+                    string.IsNullOrEmpty(src.features)
+                        ? new List<string>()
+                        : src.features.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList()));
+
+
 
 
         }
