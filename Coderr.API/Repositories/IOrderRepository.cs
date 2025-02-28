@@ -9,5 +9,8 @@ namespace Coderr.API.Repositories
         Task<Order> CreateAsync(Order order);
         Task<Order?> UpdateAsync(Guid id, Order order);
         Task<Order?> DeleteAsync(Guid id);
+
+        Task<int> GetOrderCountAsync(Guid businessUserId);
+        Task<int> GetCompletedOrderCountAsync(Guid businessUserId);
     }
 }

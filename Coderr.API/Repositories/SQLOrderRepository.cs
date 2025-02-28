@@ -45,6 +45,20 @@ namespace Coderr.API.Repositories
             return await dbContext.Orders.FirstOrDefaultAsync(x => x.id == id);
         }
 
+        public async Task<int> GetCompletedOrderCountAsync(Guid businessUserId)
+        {
+            return await dbContext.Orders
+                .Where(o => o.BusinessUserId == businessUserId && o.status == "completed")
+                .CountAsync();
+        }
+
+        public async Task<int> GetOrderCountAsync(Guid businessUserId)
+        {
+            return await dbContext.Orders
+                .Where(o => o.BusinessUserId == businessUserId)
+                .CountAsync();
+        }
+
         public async Task<Order?> UpdateAsync(Guid id, Order order)
         {
             var existingOrder = await dbContext.Orders.FirstOrDefaultAsync(x => x.id == id);
@@ -56,5 +70,7 @@ namespace Coderr.API.Repositories
             await dbContext.SaveChangesAsync();
             return existingOrder;
         }
+
+
     }
 }
