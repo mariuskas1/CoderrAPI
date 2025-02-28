@@ -21,9 +21,18 @@ namespace Coderr.API.Repositories
             return order;
         }
 
-        public Task<Order?> DeleteAsync(Guid id)
+        public async Task<Order?> DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var existingOrder = await dbContext.Orders.FirstOrDefaultAsync(x => x.id == id);
+
+            if (existingOrder == null)
+            {
+                return null;
+            }
+
+            dbContext.Orders.Remove(existingOrder);
+            await dbContext.SaveChangesAsync();
+            return existingOrder;
         }
 
         public async Task<List<Order>> GetAllAsync()

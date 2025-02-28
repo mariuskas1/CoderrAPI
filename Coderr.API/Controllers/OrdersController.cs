@@ -69,10 +69,21 @@ namespace Coderr.API.Controllers
             {
                 return NotFound();
             }
-            var regionDTO = mapper.Map<GetAllOrdersResponseDTO>(orderDomainModel);
-            return Ok(regionDTO);
-
+            var orderDTO = mapper.Map<GetAllOrdersResponseDTO>(orderDomainModel);
+            return Ok(orderDTO);
         }
 
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            var orderDomainModel = await orderRepository.DeleteAsync(id);
+
+            if (orderDomainModel == null)
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
     }
 }
