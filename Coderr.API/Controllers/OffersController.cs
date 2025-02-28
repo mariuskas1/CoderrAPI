@@ -75,5 +75,17 @@ namespace Coderr.API.Controllers
             var offerDTO = mapper.Map<UpdateOfferResponseDTO>(offerDomainModel);
             return Ok(offerDTO);
         }
+
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            var offerDomainModel = await offerRepository.DeleteAsync(id);
+            if (offerDomainModel == null)
+            { 
+                return NotFound();
+            }
+            return Ok();
+        }
     }
 }
