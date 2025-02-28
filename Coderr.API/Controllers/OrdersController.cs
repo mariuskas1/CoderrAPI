@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Coderr.API.Data;
+using Coderr.API.Models.Domain;
 using Coderr.API.Models.DTOs.Offer;
 using Coderr.API.Models.DTOs.Order;
 using Coderr.API.Repositories;
@@ -31,6 +32,32 @@ namespace Coderr.API.Controllers
             var ordersDTO = mapper.Map<List<GetAllOrdersResponseDTO>>(ordersDomain);
             return Ok(ordersDTO);
         }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(AddOfferResponseDTO), 201)]
+        public async Task<IActionResult> Create([FromBody] AddOrderRequestDTO addOrderRequestDTO)
+        {
+            var orderDomainModel = mapper.Map<Order>(addOrderRequestDTO);
+            orderDomainModel = await orderRepository.CreateAsync(orderDomainModel);
+            var addOrderResponseDTO = mapper.Map<AddOrderResponseDTO>(orderDomainModel);
+            return CreatedAtAction(nameof(GetById), new { id = addOrderResponseDTO }, addOrderResponseDTO);
+        }
+
+        //[HttpGet]
+        //[Route("{id:guid}")]
+        //[ProducesResponseType(typeof(GetSingleOrderResponseDTO), 200)]
+        //public async Task<IActionResult> GetById([FromRoute] Guid id)
+        //{
+        //    var offer = await orderRepository.GetByIdAsync(id);
+
+        //    if (offer == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var offerDTO = mapper.Map<GetSingleOfferResponseDTO>(offer);
+        //    return Ok(offerDTO);
+        //}
 
     }
 }

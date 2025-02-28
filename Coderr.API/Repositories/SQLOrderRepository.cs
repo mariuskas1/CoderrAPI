@@ -1,4 +1,5 @@
-﻿using Coderr.API.Data;
+﻿using System;
+using Coderr.API.Data;
 using Coderr.API.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,9 +14,11 @@ namespace Coderr.API.Repositories
             this.dbContext = dbContext;
         }
 
-        public Task<Order> CreateAsync(Order order)
+        public async Task<Order> CreateAsync(Order order)
         {
-            throw new NotImplementedException();
+            await dbContext.Orders.AddAsync(order);
+            await dbContext.SaveChangesAsync();
+            return order;
         }
 
         public Task<Order?> DeleteAsync(Guid id)
