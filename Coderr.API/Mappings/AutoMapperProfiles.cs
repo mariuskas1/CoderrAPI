@@ -62,7 +62,7 @@ namespace Coderr.API.Mappings
 
            CreateMap<UpdateOfferRequestDTO, Offer>();
            CreateMap<Offer, UpdateOfferResponseDTO>();
-
+           CreateMap<OfferDetails, GetOfferDetailsResponseDTO>();
 
 
 

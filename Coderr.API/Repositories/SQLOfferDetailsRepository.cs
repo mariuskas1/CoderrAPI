@@ -1,5 +1,6 @@
 ﻿using Coderr.API.Data;
 using Coderr.API.Models.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Coderr.API.Repositories
 {
@@ -12,9 +13,9 @@ namespace Coderr.API.Repositories
             this.dbContext = dbContext;
         }
 
-        public Task<OfferDetails?> GetByIdAsync(Guid id)
+        public async Task<OfferDetails?> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await dbContext.OfferDetails.FirstOrDefaultAsync(x => x.id == id);
         }
     }
 }
