@@ -68,6 +68,8 @@ builder.Services.AddScoped<IReviewRepository, SQLReviewRepository>();
 
 builder.Services.AddScoped<IUserProfileRepository, SQLUserProfileRepository>();
 
+builder.Services.AddScoped<IBaseInfoRepository, SQLBaseInfoRepository>();
+
 
 
 builder.Services.AddScoped<ITokenRepository, TokenRepository>();
