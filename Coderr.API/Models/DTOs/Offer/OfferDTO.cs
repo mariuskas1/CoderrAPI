@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace Coderr.API.Models.DTOs
+namespace Coderr.API.Models.DTOs.Offer
 {
     public class OfferDTO
     {

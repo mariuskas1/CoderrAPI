@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 
-namespace Coderr.API.Models.DTOs
+namespace Coderr.API.Models.DTOs.Offer
 {
     public class OfferDetailsDTO
     {
@@ -11,12 +11,12 @@ namespace Coderr.API.Models.DTOs
 
         [ForeignKey("Offer")]
         public Guid offer_id { get; set; }
-        public Offer offer { get; set; }
+        public Coderr.API.Models.Domain.Offer offer { get; set; }
 
         [Required]
         public string title { get; set; }
         public int revisions { get; set; }
-        public int? delivery_time_in_days{ get; set; }
+        public int? delivery_time_in_days { get; set; }
 
         [Column(TypeName = "decimal(10,2)")]
         public decimal price { get; set; }

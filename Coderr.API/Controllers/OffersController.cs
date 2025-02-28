@@ -2,7 +2,7 @@
 using AutoMapper;
 using Coderr.API.Data;
 using Coderr.API.Models.Domain;
-using Coderr.API.Models.DTOs;
+using Coderr.API.Models.DTOs.Offer;
 using Coderr.API.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -46,7 +46,6 @@ namespace Coderr.API.Controllers
         [HttpGet]
         [Route("{id:guid}")]
         [ProducesResponseType(typeof(GetSingleOfferResponseDTO), 200)]
-
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
             var offer = await offerRepository.GetByIdAsync(id);
@@ -57,6 +56,23 @@ namespace Coderr.API.Controllers
             }
 
             var offerDTO = mapper.Map<GetSingleOfferResponseDTO>(offer);
+            return Ok(offerDTO);
+        }
+
+        [HttpPut]
+        [Route("{id:Guid}")]
+        [ProducesResponseType(typeof(UpdateOfferResponseDTO), 200)]
+        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateOfferRequestDTO updateOfferRequestDTO)
+        {
+            var offerDomainModel = mapper.Map<Offer>(updateOfferRequestDTO);
+            offerDomainModel = await offerRepository.UpdateAsync(id, offerDomainModel);
+
+            if (offerDomainModel == null)
+            {
+                return NotFound();
+            }
+
+            var offerDTO = mapper.Map<UpdateOfferResponseDTO>(offerDomainModel);
             return Ok(offerDTO);
         }
     }

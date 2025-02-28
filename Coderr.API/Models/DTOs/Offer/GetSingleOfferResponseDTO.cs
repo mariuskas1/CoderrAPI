@@ -1,4 +1,4 @@
-﻿namespace Coderr.API.Models.DTOs
+﻿namespace Coderr.API.Models.DTOs.Offer
 {
     public class GetSingleOfferResponseDTO
     {

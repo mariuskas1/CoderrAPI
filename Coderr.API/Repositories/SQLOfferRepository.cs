@@ -1,4 +1,5 @@
-﻿using Coderr.API.Data;
+﻿using AutoMapper;
+using Coderr.API.Data;
 using Coderr.API.Models.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,10 +8,12 @@ namespace Coderr.API.Repositories
     public class SQLOfferRepository : IOfferRepository
     {
         private readonly CoderrDbContext dbContext;
+        private readonly IMapper mapper;
 
-        public SQLOfferRepository(CoderrDbContext dbContext)
+        public SQLOfferRepository(CoderrDbContext dbContext, IMapper mapper)
         {
             this.dbContext = dbContext;
+            this.mapper = mapper;
         }
 
 
@@ -42,9 +45,22 @@ namespace Coderr.API.Repositories
                 .FirstOrDefaultAsync(x => x.id == id);
         }
 
-        public Task<Offer?> UpdateAsync(Guid id, Offer offer)
+        public async Task<Offer?> UpdateAsync(Guid id, Offer offer)
         {
-            throw new NotImplementedException();
+            var existingOffer = await dbContext.Offers
+                .Include(o => o.details) 
+                .FirstOrDefaultAsync(o => o.id == id);
+
+            if (existingOffer == null)
+            {
+                return null;
+            }
+
+            mapper.Map(offer, existingOffer);
+            existingOffer.updated_at = DateTime.UtcNow; 
+
+            await dbContext.SaveChangesAsync();
+            return existingOffer;
         }
     }
 }

@@ -2,6 +2,8 @@
 using AutoMapper;
 using Coderr.API.Models.Domain;
 using Coderr.API.Models.DTOs;
+using Coderr.API.Models.DTOs.Offer;
+using Coderr.API.Models.DTOs.Order;
 
 namespace Coderr.API.Mappings
 {
@@ -56,6 +58,15 @@ namespace Coderr.API.Mappings
 
            CreateMap<OfferDetails, GetSingleOfferDetailResponseDTO>()
             .ForMember(dest => dest.features, opt => opt.MapFrom(src => src.features.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList()));
+
+
+           CreateMap<UpdateOfferRequestDTO, Offer>();
+           CreateMap<Offer, UpdateOfferResponseDTO>();
+
+
+
+
+
         }
     }
 }

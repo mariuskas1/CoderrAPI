@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Coderr.API.Models.Domain;
-using Coderr.API.Models.DTOs;
+using Coderr.API.Models.DTOs.Offer;
 using System.Text.Json;
 
 namespace Coderr.API.Mappings

@@ -1,10 +1,8 @@
-﻿namespace Coderr.API.Models.DTOs
+﻿namespace Coderr.API.Models.DTOs.Offer
 {
-    public class AddOfferRequestDTO
+    public class UpdateOfferRequestDTO
     {
         public string title { get; set; }
-        public string? image { get; set; }
-        public string description { get; set; }
         public List<AddOfferDetailRequestDTO> details { get; set; } = new List<AddOfferDetailRequestDTO>();
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Coderr.API.Models.Domain;
 
-namespace Coderr.API.Models.DTOs
+namespace Coderr.API.Models.DTOs.Offer
 {
     public class GetAllOffersResponseDTO
     {
