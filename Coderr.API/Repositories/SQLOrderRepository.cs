@@ -31,9 +31,9 @@ namespace Coderr.API.Repositories
             return await dbContext.Orders.ToListAsync();
         }
 
-        public Task<Order?> GetByIdAsync(Guid id)
+        public async Task<Order?> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await dbContext.Orders.FirstOrDefaultAsync(x => x.id == id);
         }
 
         public Task<Order?> UpdateAsync(Guid id, Order order)

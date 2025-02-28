@@ -43,21 +43,21 @@ namespace Coderr.API.Controllers
             return CreatedAtAction(nameof(GetById), new { id = addOrderResponseDTO }, addOrderResponseDTO);
         }
 
-        //[HttpGet]
-        //[Route("{id:guid}")]
-        //[ProducesResponseType(typeof(GetSingleOrderResponseDTO), 200)]
-        //public async Task<IActionResult> GetById([FromRoute] Guid id)
-        //{
-        //    var offer = await orderRepository.GetByIdAsync(id);
+        [HttpGet]
+        [Route("{id:guid}")]
+        [ProducesResponseType(typeof(GetAllOrdersResponseDTO), 200)]
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
+        {
+            var order = await orderRepository.GetByIdAsync(id);
 
-        //    if (offer == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (order == null)
+            {
+                return NotFound();
+            }
 
-        //    var offerDTO = mapper.Map<GetSingleOfferResponseDTO>(offer);
-        //    return Ok(offerDTO);
-        //}
+            var orderDTO = mapper.Map<GetAllOrdersResponseDTO>(order);
+            return Ok(orderDTO);
+        }
 
     }
 }
