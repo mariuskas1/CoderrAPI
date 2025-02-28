@@ -36,9 +36,16 @@ namespace Coderr.API.Repositories
             return await dbContext.Orders.FirstOrDefaultAsync(x => x.id == id);
         }
 
-        public Task<Order?> UpdateAsync(Guid id, Order order)
+        public async Task<Order?> UpdateAsync(Guid id, Order order)
         {
-            throw new NotImplementedException();
+            var existingOrder = await dbContext.Orders.FirstOrDefaultAsync(x => x.id == id);
+            if (existingOrder == null)
+            {
+                return null;
+            }
+            existingOrder.status = order.status;
+            await dbContext.SaveChangesAsync();
+            return existingOrder;
         }
     }
 }

@@ -59,5 +59,20 @@ namespace Coderr.API.Controllers
             return Ok(orderDTO);
         }
 
+        [HttpPut]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] UpdateOrderRequestDTO updateOrderRequestDTO)
+        {
+            var orderDomainModel = mapper.Map<Order>(updateOrderRequestDTO);
+            orderDomainModel = await orderRepository.UpdateAsync(id, orderDomainModel);
+            if (orderDomainModel == null)
+            {
+                return NotFound();
+            }
+            var regionDTO = mapper.Map<GetAllOrdersResponseDTO>(orderDomainModel);
+            return Ok(regionDTO);
+
+        }
+
     }
 }

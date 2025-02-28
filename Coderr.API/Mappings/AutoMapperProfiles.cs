@@ -77,6 +77,8 @@ namespace Coderr.API.Mappings
                        ? new List<string>()
                        : src.features.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList()));
 
+            CreateMap<UpdateOrderRequestDTO, Order>();
+
 
 
 
