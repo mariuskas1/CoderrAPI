@@ -1,4 +1,5 @@
 ﻿using Coderr.API.Data;
+using Coderr.API.Models.Domain;
 using Coderr.API.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -26,6 +27,19 @@ namespace Coderr.API.Controllers
             return Ok(profile);
         }
 
+        [HttpGet("business")]
+        public async Task<IActionResult> GetBusinessProfiles()
+        {
+            var businessProfiles = await userProfileRepository.GetProfilesByTypeAsync(UserProfile.UserType.Business);
+            return Ok(businessProfiles);
+        }
+
+        [HttpGet("customer")]
+        public async Task<IActionResult> GetCustomerProfiles()
+        {
+            var businessProfiles = await userProfileRepository.GetProfilesByTypeAsync(UserProfile.UserType.Customer);
+            return Ok(businessProfiles);
+        }
 
     }
 }

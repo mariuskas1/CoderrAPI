@@ -17,7 +17,7 @@ namespace Coderr.API.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<List<UserProfile>> GetProfilesByTypeAsync()
+        public Task<List<UserProfile>> GetProfilesByTypeAsync(UserProfile.UserType userType)
         {
             throw new NotImplementedException();
         }

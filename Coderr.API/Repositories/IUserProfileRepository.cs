@@ -5,6 +5,6 @@ namespace Coderr.API.Repositories
     public interface IUserProfileRepository
     {
         Task<UserProfile> GetByIdAsync(Guid id);
-        Task<List<UserProfile>> GetProfilesByTypeAsync();
+        Task<List<UserProfile>> GetProfilesByTypeAsync(UserProfile.UserType userType);
     }
 }
