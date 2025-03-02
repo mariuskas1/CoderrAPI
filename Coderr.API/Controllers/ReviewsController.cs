@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Coderr.API.Data;
+using Coderr.API.Models.Domain;
 using Coderr.API.Models.DTOs;
 using Coderr.API.Models.DTOs.Order;
 using Coderr.API.Repositories;
@@ -29,6 +30,23 @@ namespace Coderr.API.Controllers
             var reviewsDomain = await reviewRepository.GetAllAsync(business_user_id, ordering);
             var reviewsDTO = mapper.Map<List<ReviewDTO>>(reviewsDomain);
             return Ok(reviewsDTO);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] ReviewDTO reviewDTO)
+        {
+            var reviewDomainModel = mapper.Map<Review>(reviewDTO);
+            reviewDomainModel = await reviewRepository.CreateAsync(reviewDomainModel);
+            var reviewResponseDTO = mapper.Map<ReviewDTO>(reviewDomainModel);
+            return CreatedAtAction(nameof(GetById), new { id = reviewResponseDTO.id }, reviewResponseDTO);
+
+        }
+
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
+        {
+
         }
     }
 }

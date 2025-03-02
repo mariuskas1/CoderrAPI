@@ -13,6 +13,13 @@ namespace Coderr.API.Repositories
             this.dbContext = dbContext;
         }
 
+        public async Task<Review> CreateAsync(Review review)
+        {
+            await dbContext.AddAsync(review);
+            await dbContext.SaveChangesAsync();
+            return review;
+        }
+
         public async Task<Review> DeleteAsync(Guid id)
         {
             var existingReview = await dbContext.Reviews.FirstOrDefaultAsync(x => x.id == id);
