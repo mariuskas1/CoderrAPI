@@ -1,5 +1,6 @@
 ﻿using Coderr.API.Data;
 using Coderr.API.Models.Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Coderr.API.Repositories
 {
@@ -12,14 +13,17 @@ namespace Coderr.API.Repositories
             this.dbContext = dbContext;
         }
 
-        public Task<UserProfile> GetByIdAsync(Guid id)
+        public async Task<UserProfile> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await dbContext.UserProfiles
+            .FirstOrDefaultAsync(u => u.id == id);
         }
 
-        public Task<List<UserProfile>> GetProfilesByTypeAsync(UserProfile.UserType userType)
+        public async Task<List<UserProfile>> GetProfilesByTypeAsync(UserProfile.UserType userType)
         {
-            throw new NotImplementedException();
+            return await dbContext.UserProfiles
+                .Where(u => u.type == userType)
+                .ToListAsync();
         }
     }
 }
