@@ -46,7 +46,12 @@ namespace Coderr.API.Controllers
         [Route("{id:Guid}")]
         public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
-
+            var reviewDomain = await reviewRepository.GetByIdAsync(id);
+            if (reviewDomain == null) {
+                return NotFound();
+            }
+            var reviewDTO = mapper.Map<ReviewDTO>(reviewDomain);
+            return Ok(reviewDTO);
         }
     }
 }
