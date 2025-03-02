@@ -1,4 +1,5 @@
 ﻿using Coderr.API.Data;
+using Coderr.API.Models.Domain;
 
 namespace Coderr.API.Repositories
 {
@@ -9,6 +10,16 @@ namespace Coderr.API.Repositories
         public SQLUserProfileRepository(CoderrDbContext dbContext)
         {
             this.dbContext = dbContext;
+        }
+
+        public Task<UserProfile> GetByIdAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<UserProfile>> GetProfilesByTypeAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }
