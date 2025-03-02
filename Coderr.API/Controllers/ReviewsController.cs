@@ -4,6 +4,7 @@ using Coderr.API.Models.Domain;
 using Coderr.API.Models.DTOs;
 using Coderr.API.Models.DTOs.Order;
 using Coderr.API.Repositories;
+using Microsoft.AspNetCore.Components.Forms.Mapping;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -52,6 +53,20 @@ namespace Coderr.API.Controllers
             }
             var reviewDTO = mapper.Map<ReviewDTO>(reviewDomain);
             return Ok(reviewDTO);
+        }
+
+        [HttpPut]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> Update([FromBody] ReviewDTO reviewDTO, [FromRoute] Guid id)
+        {
+            var reviewDomainModel = mapper.Map<Review>(reviewDTO);
+            reviewDomainModel = await reviewRepository.UpdateAsync(id, reviewDomainModel);
+            if (reviewDomainModel == null)
+            {
+                return NotFound();
+            }
+            var reviewResponseDTO = mapper.Map<ReviewDTO>(reviewDomainModel);
+            return Ok(reviewResponseDTO);
         }
     }
 }
