@@ -68,5 +68,18 @@ namespace Coderr.API.Controllers
             var reviewResponseDTO = mapper.Map<ReviewDTO>(reviewDomainModel);
             return Ok(reviewResponseDTO);
         }
+
+
+        [HttpDelete]
+        [Route("{id:Guid}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            var reviewDomainModel = await reviewRepository.DeleteAsync(id);
+            if (reviewDomainModel == null)
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
     }
 }
