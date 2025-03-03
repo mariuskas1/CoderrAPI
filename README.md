@@ -1,7 +1,9 @@
 # Coderr
 
 ## Description
-Coderr is a Django REST Framework (DRF) application for freelance IT services. Users can create accounts, post offers for services, place orders for available services, and submit reviews.
+Coderr is an ASP.NET Core application for freelance IT services. Users can create accounts, post offers for services, place orders for available services, and submit reviews.
+
+Note: Please do also check out the DRF-version for this API under: https://github.com/mariuskas1/coderr_backend
 
 ---
 
