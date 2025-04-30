@@ -11,17 +11,13 @@ namespace Coderr.API.Models.DTOs
             Customer
         }
 
-        [Required]
         public string name { get; set; }
         public string? file_path { get; set; }
         public string? location { get; set; }
         public string? tel { get; set; }
         public string? description { get; set; }
         public string? working_hours{ get; set; }
-
-        [Required]
         public UserType type { get; set; }
-
-        public DateTime created_at { get; set; } = DateTime.UtcNow;
+        public DateTime created_at { get; set; } 
     }
 }
